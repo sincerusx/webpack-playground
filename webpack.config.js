@@ -1,7 +1,7 @@
+/** Imports and Variables */
 const webpack = require('webpack');
 const path    = require('path');
-
-const isDev = (process.env.NODE_ENV === 'production');
+const env     = process.env.NODE_ENV;
 
 /** Plugin: ExtractTextPlugin */
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -11,7 +11,8 @@ const extractText       = new ExtractTextPlugin({
 });
 /** Plugin: BrowserSync */
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-const browserSync       = new BrowserSyncPlugin({
+const browserSync       = new BrowserSyncPlugin(
+		{
 			host: 'localhost',
 			port: Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000,
 			server: {baseDir: path.resolve(__dirname, 'public')},
@@ -21,12 +22,10 @@ const browserSync       = new BrowserSyncPlugin({
 				'./public/*.html',
 				'./public/*.php'
 			]
-		},
-		{
-			reload: true
-		}
+		}, {reload: true}
 );
 
+/** Webpack Configuration */
 module.exports = {
 
 	entry: path.resolve(__dirname, 'resources/js/app.js'),
@@ -39,7 +38,6 @@ module.exports = {
 
 	module: {
 		rules: [
-			// ES6
 			{
 				test: /\.js$/,
 				loader: 'babel-loader',
@@ -48,17 +46,14 @@ module.exports = {
 					presets: ['es2015']
 				}
 			},
-			// Vue.js
 			{
 				test: /\.vue$/,
 				loader: 'vue-loader'
 			},
-			// CSS
 			{
 				test: /\.css$/,
 				use: ['css-loader']
 			},
-			// Sass
 			{
 				test: /\.scss$/,
 				use: extractText.extract({
@@ -68,7 +63,6 @@ module.exports = {
 		]
 	},
 
-	//
 	resolve: {
 		alias: {
 			// Resolving the vue var for standalone build
@@ -76,7 +70,6 @@ module.exports = {
 		}
 	},
 
-	//
 	devServer: {
 		// where to serve content from
 		contentBase: path.resolve(__dirname, 'public'),
@@ -95,11 +88,10 @@ module.exports = {
 	watch: true,
 
 	plugins: [
+		new webpack.ProvidePlugin({
+			$: 'jquery',  jQuery: 'jquery', vue: 'vue'
+		}),
 		extractText,
-		browserSync
-		/*new HtmlWebpackPlugin({
-			template: 'public/index.html'
-		}),*/
-		//new CleanWebpackPlugin(['resources'])
+		browserSync,
 	]
 };
