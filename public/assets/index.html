@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Webpack</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body id="app">
+    <div class="container">
+        <h1>{{ message }}</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+        <button id="secret-button">Show the Secret</button>
+        <p id="secret-paragraph">You can't see this all the time</p>
+    </div>
+
+    <br>
+    <hr>
+    <br>
+    <div class="container">
+        <section>
+            <p id="outputTxt">Touch ah button</p>
+            <button id="randomInt">A random Integer</button>
+        </section>
+        <section>
+            <input id="min" class="nRanges" type="text" placeholder="min" value="5">
+            <input id="max" class="nRanges" type="text" placeholder="max" value="50">
+            <button id="randomRange">A random Integer between a range</button>
+        </section>
+    </div>
+    <script src="assets/js/bundle.mix.js"></script>
+</body>
+</html>
